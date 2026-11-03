@@ -1,0 +1,53 @@
+# 经验库窄闸门（骨架版 dsh-experience-gate）。
+#
+# 形态照 DSH 自带文档 cordis-plugin-development/references/host-plugin.md：
+# bundle 的 patch 只负责 insert 一行，插件本体在 index.js / policy.js。
+#
+# 骨架版用法：把 gateRoot 填上你的库根再挂载；gateRoot 留空＝整道闸自停用（全部放行）。
+# dispatchDoc / settleDoc / longTaskDoc 留空＝对应子闸不生效。各键含义见同目录 README.md。
+- insert:
+    - id: experience-gate
+      name: '@local/dsh-experience-gate'
+      config:
+        enabled: true
+        # 只拦「会改东西」的工具；读、搜、列目录不在里面。
+        tools:
+          - write
+          - edit
+          - pwsh
+          - bash
+          - terminal_send
+          - subagent
+          - run_code
+        # 【必配】库根。留空＝闸门整体自停用（所有调用放行），不会把系统锁死。
+        gateRoot: ''
+        # 命中只认这些分卷目录；留空＝命中落在库根下即算（退化为宽口径）。
+        volumes: []
+        # 「库还在不在」的自检目录：库根下存在其中任一目录才算在；留空＝只查库根本身存在。
+        requiredVolumes: []
+        # 一次检索命中最多算这么多行，超过判「太泛」＝无效并收回本轮放行权。
+        maxHits: 120
+        # 命中这些文件名不算「查过」（谁都能一搜就中的根目录说明类）。
+        excludeFiles:
+          - README.md
+        # 子闸一：开新的一路（subagent 等）之前必须先读过「派活那篇」。
+        # dispatchDoc 留空＝这道子闸不生效。
+        requireDispatchDoc: true
+        dispatchTools:
+          - subagent
+          - subagent_fork
+          - spawn_teammate
+        dispatchDoc: ''
+        # 子闸二：消息提到沉淀/偏好/习惯/规则时，写库前必须先读过「沉淀清单」那篇。
+        # settleDoc 留空＝这道子闸不生效。
+        requireSettleDoc: true
+        settleDoc: ''
+        # 子闸三：长活计时反馈——guard 记起点、结果算秒；同轮第 2 笔超阈值命令起，
+        # 对下一笔命令类调用拦一次（拦完自动放开防锁死）。检索调用照旧无条件放行。
+        longTaskGate:
+          enabled: true
+          thresholdSeconds: 30
+        # 「长活先派」出处篇名（相对 gateRoot；空＝拒绝文案不带出处路径）。
+        longTaskDoc: ''
+        # 审计日志目录（绝对路径；空＝不记日志）。
+        logDir: ''

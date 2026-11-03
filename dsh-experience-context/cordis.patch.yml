@@ -1,0 +1,59 @@
+# 经验库检索卡注入（骨架版 dsh-experience-context）。
+#
+# 形态照 DSH 自带文档 cordis-plugin-development/references/host-plugin.md：
+# bundle 的 patch 只负责 insert 一行，插件本体在 index.js。
+#
+# 骨架版用法：把下面标了【必配】的键填上你的本机值再挂载；全部留空也能挂——
+# 卡片会用通用兜底文案，不带任何具体路径。各键含义见同目录 README.md 的配置表。
+- insert:
+    - id: experience-context
+      name: '@local/dsh-experience-context'
+      config:
+        enabled: true
+        # 【必配】你的经验/规则库根目录：检索卡里的命令示例与各卡出处都拼它。
+        libraryRoot: ''
+        # 库内分卷名列表（检索卡会列一行；空数组＝不列分卷行）。
+        volumes: []
+        # rg 可执行文件路径；留空用 PATH 上的 rg，没有 rg 会退回 PowerShell 检索。
+        rgPath: ''
+        # 自动检索（B 版）：发卡前拿用户消息里的关键词跑一次检索，把命中文件路径带进卡。
+        # 每轮多几百 token；默认关。
+        autoSearch: false
+        autoSearchMaxHits: 5
+        autoSearchTimeoutMs: 4000
+        autoSearchKeywordsMax: 6
+        # 回复体检：每轮第一步回看上一条助手回复，命中排期话／自设预算贴提醒（只提醒不拦）。
+        lint: true
+        # 体检日志文件（绝对路径或空）；按天切份。空＝不记日志。
+        lintLog: ''
+        lintDebug: false
+        # ——下面是各张卡：开关＋出处篇名（相对 libraryRoot 的路径；空＝该卡只出通用文案、不带出处）——
+        # 沉淀卡：消息提到沉淀/偏好/习惯/规则时递一张「四件事」卡。
+        settleCard: true
+        settleDocRel: ''
+        # 回话格式卡：每轮都带，无词判断。
+        replyFormatCard: true
+        replyFormatDocRel: ''
+        # 看图卡：带图附件／文字含图字／本轮用过看图工具，任一即递。
+        imageCard: true
+        imageDocRel: ''
+        # 先找现成方案卡：可行性问句（只能…吗/行不行…？）才递。
+        solutionCard: true
+        solutionDocRel: ''
+        networkDocRel: ''
+        # 联网备用代理地址（如 http://127.0.0.1:端口号）；空＝文案里提示去配置里填。
+        proxyUrl: ''
+        # 收尾自检卡：消息命中收尾形状才递；五桶带出处。
+        wrapupCard: true
+        wrapupDocRel: ''
+        wrapupTempDocRel: ''
+        # 收尾「必答三态」一条的出处（绝对路径或空）。
+        wrapupOrderDoc: ''
+        # 追因卡：消息命中追因形状（怎么办/为什么不行/给个方案…）才递；三问递进。
+        causeCard: true
+        causeBirthDocRel: ''
+        causeDisciplineDocRel: ''
+        causeRootfixDocRel: ''
+        causeMetaDocRel: ''
+        # 「长活先派」常驻行的出处（相对 libraryRoot；空＝不带出处）。
+        longTaskDocRel: ''

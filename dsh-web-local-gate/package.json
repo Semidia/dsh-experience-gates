@@ -1,0 +1,22 @@
+{
+  "name": "@local/dsh-web-local-gate",
+  "version": "0.1.0-skeleton.1",
+  "private": true,
+  "type": "module",
+  "description": "骨架版：本机网络口径硬闸——一律拒 DSH 官方联网工具 web_search/web_fetch，拒绝文案给「curl 直连优先、不通挂配置代理」的可执行一步与两篇自定义出处；库根、出处篇名、脚本路径、代理地址、日志目录全部走 config。",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "policy.js",
+    "cordis.patch.yml",
+    "README.md",
+    "test.mjs"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

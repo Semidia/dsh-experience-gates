@@ -1,0 +1,4 @@
+node_modules/
+*.log
+test-output.txt
+自检输出.txt

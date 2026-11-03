@@ -1,0 +1,28 @@
+# 本机网络口径硬闸（骨架版 dsh-web-local-gate）。
+#
+# 形态照 DSH 自带文档 cordis-plugin-development/references/host-plugin.md：
+# bundle 的 patch 只负责 insert 一行，插件本体在 index.js / policy.js。
+#
+# 骨架版用法：出处篇名（proxyDoc / errDoc）、固化脚本（scriptPath）、代理地址（proxyUrl）
+# 按你的本机网络口径填；全部留空也能挂——拒绝文案只剩「curl 直连优先 + 去配置里填代理」的通用兜底。
+- insert:
+    - id: web-local-gate
+      name: '@local/dsh-web-local-gate'
+      config:
+        # 总开关，默认开。false = 两个工具都放行、且不注册任何守卫。
+        enabled: true
+        tools:
+          - web_search
+          - web_fetch
+        # 你的经验/规则库根目录（拒绝文案里的出处路径拼它）；留空＝文案不带库根。
+        gateRoot: ''
+        # 出处一：本机网络口径篇（相对 gateRoot；留空＝这一条出处不展示）。
+        proxyDoc: ''
+        # 出处二：代理报错先查本机代理的排查篇（相对 gateRoot；留空＝这一条出处不展示）。
+        errDoc: ''
+        # 固化抓取脚本路径（绝对路径；留空＝文案不提脚本）。
+        scriptPath: ''
+        # 备用代理地址（如 http://127.0.0.1:端口号；留空＝文案提示去配置里填）。
+        proxyUrl: ''
+        # 审计日志目录（绝对路径；留空＝不记日志）。
+        logDir: ''

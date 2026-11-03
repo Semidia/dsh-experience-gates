@@ -1,0 +1,21 @@
+{
+  "name": "@local/dsh-experience-context",
+  "version": "0.7.1-skeleton.1",
+  "private": true,
+  "type": "module",
+  "description": "骨架版：每条用户消息第一步注入「经验库检索卡」（常驻长活先派一行），并可按配置追加回话格式卡／看图卡／先找现成方案卡／沉淀卡／收尾自检卡／追因卡与回复体检；库根、分卷、篇名出处、代理地址、日志路径全部走 config，默认留空＝通用兜底文案。",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "README.md",
+    "test.mjs"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

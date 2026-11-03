@@ -1,0 +1,22 @@
+{
+  "name": "@local/dsh-experience-gate",
+  "version": "0.7.0-skeleton.1",
+  "private": true,
+  "type": "module",
+  "description": "骨架版：经验库窄闸门——写东西前这一轮必须先真查过库；开新一路前先读派活篇；沉淀话题写库前先读沉淀清单；长活计时反馈（同轮第 2 笔超阈值命令起拦一次、拦完自动放开）。库根、分卷、篇名出处全部走 config；库根未配置时整体自停用（全部放行），不会锁死系统。",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "policy.js",
+    "cordis.patch.yml",
+    "README.md",
+    "test.mjs"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
